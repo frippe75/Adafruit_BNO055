@@ -119,6 +119,42 @@ bool Adafruit_BNO055::begin(adafruit_bno055_opmode_t mode)
 
 /**************************************************************************/
 /*!
+ @brief  Enter Suspend mode (i.e., sleep)
+ */
+/**************************************************************************/
+void Adafruit_BNO055::enterSuspendMode()
+{
+    adafruit_bno055_opmode_t modeback = _mode;
+    
+    /* Switch to config mode (just in case since this is the default) */
+    setMode(OPERATION_MODE_CONFIG);
+    delay(25);
+    write8(BNO055_PWR_MODE_ADDR, 0x02);
+    /* Set the requested operating mode (see section 3.3) */
+    setMode(modeback);
+    delay(20);
+}
+
+/**************************************************************************/
+/*!
+ @brief  Enter Normal mode (i.e., wake)
+ */
+/**************************************************************************/
+void Adafruit_BNO055::enterNormalMode()
+{
+    adafruit_bno055_opmode_t modeback = _mode;
+    
+    /* Switch to config mode (just in case since this is the default) */
+    setMode(OPERATION_MODE_CONFIG);
+    delay(25);
+    write8(BNO055_PWR_MODE_ADDR, 0x00);
+    /* Set the requested operating mode (see section 3.3) */
+    setMode(modeback);
+    delay(20);
+}
+
+/**************************************************************************/
+/*!
     @brief  Puts the chip in the specified operating mode
 */
 /**************************************************************************/
