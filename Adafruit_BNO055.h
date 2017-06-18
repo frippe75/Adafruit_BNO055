@@ -286,6 +286,8 @@ class Adafruit_BNO055 : public Adafruit_Sensor
     Adafruit_BNO055 ( int32_t sensorID = -1, uint8_t address = BNO055_ADDRESS_A );
 #endif
     bool  begin               ( adafruit_bno055_opmode_t mode = OPERATION_MODE_NDOF );
+    void  enterSuspendMode    ( void );
+    void  enterNormalMode     ( void );
     void  setMode             ( adafruit_bno055_opmode_t mode );
     void  getRevInfo          ( adafruit_bno055_rev_info_t* );
     void  displayRevInfo      ( void );
